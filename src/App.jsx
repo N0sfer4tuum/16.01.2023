@@ -1,4 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const useEffectComponent = () => {
+  useEffect(() => {
+    return () => console.log("Component was deleated");
+  }, []);
+
+  return(
+    <div>
+      ААААААААААААААААААААААААААААААААААААААААА
+    </div>
+  )
+}
 
 const App = () =>{
 
@@ -11,6 +23,12 @@ const App = () =>{
     email: "",
     password: "",
   });
+
+const [a, setA] = useState(0);
+console.log('За пределами useEffect');
+  useEffect(() => {
+    console.log('Ура! Рендер!'); 
+  }, [count, form]);
 
   const onChangeHandle = (e) => {
     setName(e.target.value);
@@ -41,6 +59,9 @@ const App = () =>{
       <button onClick={() => setCount((prev) => prev+1)}>+1</button>
       <button onClick={() => setCount(count + 5)}>+5</button>
 
+      {
+        count >= 10 ? <h1>Compomemt is unavailable now :c</h1> : <useEffectComponent/>
+      }
       <br />
 
       <h1>Привет, {name}!</h1>
